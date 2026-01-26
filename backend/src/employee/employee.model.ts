@@ -1,6 +1,5 @@
 //getSummary(): string =returns string, reusable logic
 import { Employee } from './employee.interface';
-
 export class EmployeeModel implements Employee {
   constructor(
     public id: number, //public means shortcut of "this.id = id;"
@@ -10,7 +9,8 @@ export class EmployeeModel implements Employee {
     public isActive: boolean = true,
   ) {}
 
-  getSummary(): string {
-    return `${this.name} - ${this.department}`;
-  }
+  //   getSummary(): string {
+  //     return `${this.name} - ${this.department}`;
+  //   }
 }
+export type { Employee };

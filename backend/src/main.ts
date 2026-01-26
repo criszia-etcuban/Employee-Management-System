@@ -1,3 +1,7 @@
+// NestFactory.create → start app
+// AppModule → root config
+// listen(3000) → server port
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
