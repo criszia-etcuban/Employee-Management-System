@@ -1,26 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Employee } from './employee.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm'; //Repository = DB API
+import { Employee } from './employee.entity';
 
 @Injectable()
 export class EmployeeService {
-  private employees: Employee[] = [
-    {
-      id: 1,
-      name: 'Juan',
-      email: 'juan@test.com',
-      department: 'IT',
-      isActive: true,
-    },
-    {
-      id: 2,
-      name: 'Maria',
-      email: 'maria@test.com',
-      department: 'HR',
-      isActive: false,
-    },
-  ];
-
-  findAll(): Employee[] {
-    return this.employees;
+  constructor(
+    @InjectRepository(Employee)
+    private repo: Repository<Employee>,
+  ) {}
+  //find() = SELECT *
+  findAll(): Promise<Employee[]> {
+    return this.repo.find();
+  }
+  //create() = prepare entity
+  create(employee: Partial<Employee>): Promise<Employee> {
+    const newEmployee = this.repo.create(employee);
+    return this.repo.save(newEmployee); //save() = INSERT
   }
 }
