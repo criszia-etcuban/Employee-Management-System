@@ -2,11 +2,10 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Employee } from '../../models/Employee';
-
+import { createEmployee } from '../../api/employee.api';
 
 export default function AddEmployee() {
   const [employee, setEmployee] = useState<Employee>({
-    id: 0,
     name: '',
     email: '',
     department: '',
@@ -22,10 +21,10 @@ export default function AddEmployee() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('New Employee:', employee);
-    alert('Employee added (console only)');
+    await createEmployee(employee);
+    alert('Employee Added!');
   };
 
   return (

@@ -1,53 +1,40 @@
 //.map() : Loop ng array
 import { Employee } from '../../models/Employee';
+import { useEffect, useState } from 'react';
+import { getEmployees } from '../../api/employee.api';
 
 export default function EmployeeList() {
-  const employees: Employee[] = [
-    {
-      id: 1,
-      name: 'Juan',
-      email: 'juan@test.com',
-      department: 'IT',
-      isActive: true,
-    },
-    {
-      id: 2,
-      name: 'Maria',
-      email: 'maria@test.com',
-      department: 'HR',
-      isActive: false,
-    },
-  ];
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => { // useEffect → runs on page load
+    getEmployees()
+      .then(data => setEmployees(data))
+      .finally(() => setLoading(false));
+  }, []);
+
+    if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="container mt-4">
-      <h2>Employee List</h2>
-
-      <table className="table table-bordered table-striped">
-        <thead className="table-dark">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Status</th>
+    <table className="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {employees.map(emp => (
+          <tr key={emp.id}>
+            <td>{emp.name}</td>
+            <td>{emp.email}</td>
+            <td>{emp.department}</td>
+            <td>{emp.isActive ? 'Active' : 'Inactive'}</td>
           </tr>
-        </thead>
-
-        <tbody>
-          {employees.map(emp => (
-            <tr key={emp.id}>
-              <td>{emp.id}</td>
-              <td>{emp.name}</td>
-              <td>{emp.email}</td>
-              <td>{emp.department}</td>
-              <td>
-                {emp.isActive ? 'Active' : 'Inactive'}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 }
