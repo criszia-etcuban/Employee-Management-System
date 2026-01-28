@@ -3,19 +3,15 @@ import {
   Controller,
   Get,
   Post,
-  Param,
-  Patch,
   Delete,
+  Param,
   ParseIntPipe,
 } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
-// import { Employee } from './employee.entity';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
-import { UpdateEmployeeDto } from './dto/update-employee.dto';
 
 @Controller('employees')
 export class EmployeeController {
-  //   service: any;
   constructor(private readonly employeeService: EmployeeService) {}
 
   @Get()
@@ -28,13 +24,7 @@ export class EmployeeController {
     return this.employeeService.create(dto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateEmployeeDto) {
-    return this.employeeService.update(+id, dto);
-  }
-
   @Delete(':id')
-  //ParseIntPipe → siguradong number
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.employeeService.remove(id);
   }
