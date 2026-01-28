@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Employee } from '../../models/Employee';
 import { createEmployee } from '../../api/employee.api';
+import EmployeeList from './EmployeeList';
 
 export default function AddEmployee() {
   const initialEmployee = {
@@ -41,6 +42,7 @@ export default function AddEmployee() {
             name="name"
             className="form-control mb-2"
             placeholder="Name"
+            value={employee.name}
             onChange={handleChange}
           />
 
@@ -48,6 +50,7 @@ export default function AddEmployee() {
             name="email"
             className="form-control mb-2"
             placeholder="Email"
+            value={employee.email}
             onChange={handleChange}
           />
 
@@ -55,6 +58,7 @@ export default function AddEmployee() {
             name="department"
             className="form-control mb-2"
             placeholder="Department"
+            value={employee.department}
             onChange={handleChange}
           />
 
