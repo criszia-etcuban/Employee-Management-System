@@ -5,12 +5,14 @@ import { Employee } from '../../models/Employee';
 import { createEmployee } from '../../api/employee.api';
 
 export default function AddEmployee() {
-  const [employee, setEmployee] = useState<Employee>({
-    name: '',
-    email: '',
-    department: '',
-    isActive: true,
-  });
+  const initialEmployee = {
+  name: '',
+  email: '',
+  department: '',
+  isActive: true,
+};
+
+  const [employee, setEmployee] = useState<Employee>(initialEmployee);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -25,6 +27,8 @@ export default function AddEmployee() {
     e.preventDefault();
     await createEmployee(employee);
     alert('Employee Added!');
+
+    setEmployee(initialEmployee); // reset form
   };
 
   return (

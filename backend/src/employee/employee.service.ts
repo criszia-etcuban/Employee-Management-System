@@ -36,4 +36,12 @@ export class EmployeeService {
     Object.assign(employee, dto);
     return await this.repo.save(employee);
   }
+
+  async remove(id: number): Promise<void> {
+    const result = await this.repo.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException('Employee not found');
+    }
+  }
 }

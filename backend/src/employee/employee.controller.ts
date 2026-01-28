@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Param, Patch } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Param,
+  Patch,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 // import { Employee } from './employee.entity';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
@@ -22,5 +31,11 @@ export class EmployeeController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateEmployeeDto) {
     return this.employeeService.update(+id, dto);
+  }
+
+  @Delete(':id')
+  //ParseIntPipe → siguradong number
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.employeeService.remove(id);
   }
 }
