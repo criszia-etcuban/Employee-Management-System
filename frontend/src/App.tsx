@@ -33,21 +33,28 @@ import AddEmployee from './components/employee/AddEmployee';
 
 function App() {
   return (
-    <div className="container mt-3">
-      <nav className="mb-3">
-        <Link to="/list" className="btn btn-primary me-2">
-          Employee List
-        </Link>
-        <Link to="/add" className="btn btn-success">
-          Add Employee
-        </Link>
-      </nav>
+    <div className="App">
+      <div className="container">
+        <header className="app-header">
+          <h1 className="app-title">Employee Management System</h1>
+          <p className="app-subtitle">Manage your team efficiently and beautifully</p>
+        </header>
 
-      <Routes>
-        <Route path="/list" element={<EmployeeList />} />
-        <Route path="/add" element={<AddEmployee />} />
-        <Route path="*" element={<EmployeeList />} />
-      </Routes>
+        <nav className="nav-buttons">
+          <Link to="/list" className="nav-btn nav-btn-primary">
+            👥 Employee List
+          </Link>
+          <Link to="/add" className="nav-btn nav-btn-success">
+            ➕ Add Employee
+          </Link>
+        </nav>
+
+        <Routes>
+          <Route path="/list" element={<EmployeeList />} />
+          <Route path="/add" element={<AddEmployee />} />
+          <Route path="*" element={<EmployeeList />} />
+        </Routes>
+      </div>
     </div>
   );
 }
